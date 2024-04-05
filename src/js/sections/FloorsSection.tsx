@@ -28,6 +28,8 @@ import * as appUtils from "../support/appUtils";
 import Handles from "esri/core/Handles";
 import AppState from "../AppState";
 
+
+
 @subclass("legendWrapper")
 class LegendWrapper extends Widget {
   @property()
@@ -56,6 +58,9 @@ class LegendWrapper extends Widget {
     </div>);
   }
 }
+
+
+
 
 
 @subclass("playButton")
@@ -215,9 +220,60 @@ export class FloorsSection extends Section {
       <h1 class="number">{selectedFloor}</h1>
       {title}
       <h3 class="subtitle">[{currentLevel.subtitle}]</h3>
+      
+      {/* <button >KNAPPPPPPPPPPPPPPP</button> */}
       <div class="content">{currentLevel.render()}</div>
+
+      <span><h5>Desk Occupancy Sensor</h5> </span>
+      <label class="switch"> 
+      <input type="checkbox" onclick={() => {
+          const layer = this.appState.view.map.findLayerById("sensorLayerOcc");
+          layer.visible = !layer.visible;
+      }}/>
+      <span class="slider round"></span>
+      </label>
+
+      <span><h5>Bluetooth beacon</h5> </span>
+      <label class="switch">
+      <input type="checkbox" onclick={() => {
+          const layer = this.appState.view.map.findLayerById("sensorLayerBeac");
+          layer.visible = !layer.visible;
+      }}/>
+      <span class="slider round"></span>
+      </label>
+
+      <span><h5>CO2 Sensor</h5> </span>
+      <label class="switch"> 
+      <input type="checkbox" onclick={() => {
+          const layer = this.appState.view.map.findLayerById("sensorLayerC02");
+          layer.visible = !layer.visible;
+      }}/>
+      <span class="slider round"></span>
+      </label>
+
+      <span><h5>Temperatur</h5> </span>
+      <label class="switch">  
+      <input type="checkbox" onclick={() => {
+          const layer = this.appState.view.map.findLayerById("sensorLayerTemp");
+          layer.visible = !layer.visible;
+      }}/>
+      <span class="slider round"></span>
+      </label>
+
+      <span><h5>Cloud Connector</h5> </span>
+      <label class="switch"> 
+      <input type="checkbox" onclick={() => {
+          const layer = this.appState.view.map.findLayerById("sensorLayerCon");
+          layer.visible = !layer.visible;
+      }}/>
+      <span class="slider round"></span>
+      </label>
+      
+      
     </div>) : null;
   }
+
+  
 
   paneRight() {
     const floorSelector = this.floorSelector ? this.floorSelector.render() : null;
@@ -269,7 +325,6 @@ export class FloorsSection extends Section {
     if (this.floors) {
       this.floors.getItemAt(this.selectedFloor).activate();
     }
-
     this.appState.view.environment.lighting.directShadowsEnabled = false;
     this.appState.view.environment.lighting.ambientOcclusionEnabled = false;
     this.oldDate = this.appState.view.environment.lighting.date;

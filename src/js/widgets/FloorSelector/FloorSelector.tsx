@@ -36,10 +36,10 @@ class FloorSelector extends Widget {
   activeFloor: number;
 
   @property()
-  maxFloor = 4;
+  maxFloor = 7;
 
   @property()
-  minFloor = 0;
+  minFloor = 3;
 
   @property({constructOnly: true})
   appState: AppState;
